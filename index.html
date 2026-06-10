@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muto Watches</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #111111;
+    --white: #ffffff;
+    --gray: #888888;
+    --light-gray: #f5f5f5;
+    --border: #e0e0e0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-bottom-color: var(--border); }
+  .nav-logo { font-size: 18px; letter-spacing: 10px; font-weight: 200; text-decoration: none; color: var(--black); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; text-decoration: none; color: var(--black); font-weight: 300; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 0.5; }
+
+  /* HERO */
+  #hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 24px;
+    position: relative;
+  }
+  .hero-logo { font-size: clamp(48px, 10vw, 96px); letter-spacing: clamp(12px, 3vw, 28px); font-weight: 200; margin-bottom: 16px; }
+  .hero-sub { font-size: 11px; letter-spacing: 8px; color: var(--gray); margin-bottom: 64px; }
+  .hero-cta {
+    display: flex; gap: 16px; align-items: center;
+  }
+  .btn-primary {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.7; }
+  .btn-secondary {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--black);
+    border: 1px solid var(--black);
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .btn-secondary:hover { background: var(--black); color: var(--white); }
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--gray);
+    animation: bounce 2s infinite;
+  }
+  .scroll-indicator::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: var(--gray);
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* SECTIONS */
+  section { padding: 120px 48px; }
+
+  /* ABOUT */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .about-label { font-size: 9px; letter-spacing: 6px; color: var(--gray); text-transform: uppercase; margin-bottom: 24px; }
+  .about-title { font-size: clamp(28px, 4vw, 48px); font-weight: 200; line-height: 1.3; margin-bottom: 32px; letter-spacing: 2px; }
+  .about-text { font-size: 13px; line-height: 2; color: #444; font-weight: 300; margin-bottom: 24px; }
+  .about-image {
+    background: var(--light-gray);
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray);
+    font-size: 11px;
+    letter-spacing: 4px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--black);
+    margin: 0 auto;
+  }
+
+  /* PRODUCTS */
+  #products { background: var(--white); }
+  .products-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  .section-label { font-size: 9px; letter-spacing: 6px; color: var(--gray); text-transform: uppercase; margin-bottom: 16px; }
+  .section-title { font-size: clamp(24px, 3vw, 40px); font-weight: 200; letter-spacing: 4px; }
+
+  .class-a {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .class-a-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    margin-bottom: 48px;
+  }
+  .class-title { font-size: 28px; letter-spacing: 8px; font-weight: 200; }
+  .class-desc { font-size: 11px; letter-spacing: 2px; color: var(--gray); max-width: 400px; text-align: right; }
+
+  .product-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 80px;
+    align-items: start;
+  }
+  .product-image-main {
+    background: var(--light-gray);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray);
+    font-size: 11px;
+    letter-spacing: 4px;
+  }
+  .product-info { padding: 24px 0; }
+  .product-name { font-size: 24px; letter-spacing: 6px; font-weight: 200; margin-bottom: 8px; }
+  .product-tagline { font-size: 11px; letter-spacing: 3px; color: var(--gray); margin-bottom: 32px; }
+  .product-detail { font-size: 12px; line-height: 2.2; color: #444; font-weight: 300; margin-bottom: 32px; }
+  .product-price { font-size: 18px; letter-spacing: 4px; font-weight: 200; margin-bottom: 32px; }
+  .spec-list { border-top: 1px solid var(--border); padding-top: 24px; margin-bottom: 32px; }
+  .spec-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  .spec-key { color: var(--gray); }
+
+  /* DIAL OPTIONS */
+  .dials-section { margin-bottom: 80px; }
+  .dials-label { font-size: 9px; letter-spacing: 6px; color: var(--gray); text-transform: uppercase; margin-bottom: 32px; }
+  .dials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .dial-card {
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .dial-card:hover { opacity: 0.7; }
+  .dial-image {
+    background: var(--light-gray);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray);
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+  .dial-name { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 4px; }
+  .dial-detail { font-size: 10px; letter-spacing: 2px; color: var(--gray); }
+
+  /* BAND OPTIONS */
+  .bands-section { margin-bottom: 80px; }
+  .bands-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .band-card { cursor: pointer; transition: opacity 0.2s; }
+  .band-card:hover { opacity: 0.7; }
+  .band-image {
+    background: var(--light-gray);
+    aspect-ratio: 2/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray);
+    font-size: 9px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .band-name { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; }
+
+  /* EMAIL SECTION */
+  #email-section {
+    background: var(--black);
+    color: var(--white);
+    text-align: center;
+    padding: 120px 48px;
+  }
+  #email-section .section-label { color: #666; }
+  #email-section .section-title { color: var(--white); margin-bottom: 16px; }
+  .email-sub { font-size: 12px; letter-spacing: 3px; color: #888; margin-bottom: 48px; }
+  .email-form { display: flex; gap: 0; max-width: 480px; margin: 0 auto; }
+  .email-input {
+    flex: 1;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding: 14px 20px;
+    border: 1px solid #444;
+    background: transparent;
+    color: var(--white);
+    outline: none;
+  }
+  .email-input::placeholder { color: #555; }
+  .email-submit {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: var(--white);
+    color: var(--black);
+    border: none;
+    padding: 14px 24px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .email-submit:hover { opacity: 0.8; }
+  .email-success { display: none; font-size: 12px; letter-spacing: 4px; color: #888; margin-top: 24px; }
+
+  /* FOOTER */
+  footer {
+    padding: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gray);
+  }
+
+  /* POPUP */
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .popup-overlay.active { opacity: 1; pointer-events: all; }
+  .popup {
+    background: var(--white);
+    padding: 64px 56px;
+    max-width: 480px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.4s;
+  }
+  .popup-overlay.active .popup { transform: translateY(0); }
+  .popup-close {
+    position: absolute;
+    top: 20px; right: 24px;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--gray);
+    background: none;
+    border: none;
+    line-height: 1;
+  }
+  .popup-label { font-size: 9px; letter-spacing: 6px; color: var(--gray); text-transform: uppercase; margin-bottom: 24px; }
+  .popup-title { font-size: 24px; letter-spacing: 4px; font-weight: 200; margin-bottom: 12px; }
+  .popup-sub { font-size: 11px; letter-spacing: 2px; color: var(--gray); line-height: 1.8; margin-bottom: 32px; }
+  .popup-form { display: flex; flex-direction: column; gap: 12px; }
+  .popup-input {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    outline: none;
+    background: var(--white);
+    color: var(--black);
+    width: 100%;
+  }
+  .popup-input:focus { border-color: var(--black); }
+  .popup-success { display: none; font-size: 11px; letter-spacing: 3px; color: var(--gray); margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popup">
+  <div class="popup">
+    <button class="popup-close" onclick="closePopup()">×</button>
+    <p class="popup-label">Limited Early Access</p>
+    <h2 class="popup-title">10% Off Your Pre-Order</h2>
+    <p class="popup-sub">Enter your email for product updates and unlock 10% off your Muto pre-order.</p>
+    <div class="popup-form">
+      <input class="popup-input" type="email" id="popup-email" placeholder="your@email.com">
+      <button class="btn-primary" onclick="submitPopup()" style="width:100%">Unlock My Discount</button>
+    </div>
+    <p class="popup-success" id="popup-success">You're on the list. We'll be in touch.</p>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">MUTO</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Collection</a></li>
+    <li><a href="#email-section">Pre-Order</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-logo">MUTO</div>
+  <div class="hero-sub">WATCHES</div>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="document.getElementById('popup').classList.add('active')">Register Interest</button>
+    <a href="#products" class="btn-secondary">View Collection</a>
+  </div>
+  <div class="scroll-indicator">SCROLL</div>
+</section>
+
+<!-- ABOUT -->
+<section>
+  <div id="about">
+    <div>
+      <p class="about-label">Our Mission</p>
+      <h2 class="about-title">Fine watchmaking — reimagined for those who refuse to settle.</h2>
+      <p class="about-text">One precision-crafted timepiece. Every occasion. Infinite expression.</p>
+      <p class="about-text">Muto was born from a simple question: why should you buy three watches when one should do? We engineered a modular system that lets you swap dials instantly — no tools, no compromises.</p>
+      <a href="#products" class="btn-secondary">Explore the Collection</a>
+    </div>
+    <div class="about-image">CAMPAIGN IMAGE</div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="products-header">
+    <p class="section-label">The Collection</p>
+    <h2 class="section-title">CLASS A</h2>
+  </div>
+
+  <div class="class-a">
+    <div class="class-a-header">
+      <span class="class-title">CLASS A</span>
+      <span class="class-desc">Our inaugural timepiece. Available in silver and gold. Includes three interchangeable dials.</span>
+    </div>
+
+    <!-- MAIN PRODUCT -->
+    <div class="product-main">
+      <div class="product-image-main">WATCH RENDER</div>
+      <div class="product-info">
+        <h3 class="product-name">MUTO — CLASS A</h3>
+        <p class="product-tagline">Silver · Three Dial Set</p>
+        <p class="product-detail">The Class A is our foundation — a precision-engineered case housing a Swiss automatic movement, paired with three interchangeable dials that swap in seconds. One watch for every version of you.</p>
+        <p class="product-price">From $— —</p>
+        <div class="spec-list">
+          <div class="spec-item"><span class="spec-key">Case</span><span>44mm Stainless Steel</span></div>
+          <div class="spec-item"><span class="spec-key">Movement</span><span>Swiss Automatic</span></div>
+          <div class="spec-item"><span class="spec-key">Crystal</span><span>Sapphire</span></div>
+          <div class="spec-item"><span class="spec-key">Dials Included</span><span>3</span></div>
+          <div class="spec-item"><span class="spec-key">Water Resistance</span><span>TBD</span></div>
+        </div>
+        <button class="btn-primary" onclick="document.getElementById('popup').classList.add('active')">Pre-Order — Coming Soon</button>
+      </div>
+    </div>
+
+    <!-- DIAL OPTIONS -->
+    <div class="dials-section">
+      <p class="dials-label">Included Dial Options</p>
+      <div class="dials-grid">
+        <div class="dial-card">
+          <div class="dial-image">DIAL 01</div>
+          <p class="dial-name">Classic White</p>
+          <p class="dial-detail">Minimalist · Roman Numerals</p>
+        </div>
+        <div class="dial-card">
+          <div class="dial-image">DIAL 02</div>
+          <p class="dial-name">Midnight Navy</p>
+          <p class="dial-detail">Bold · Baton Indices</p>
+        </div>
+        <div class="dial-card">
+          <div class="dial-image">DIAL 03</div>
+          <p class="dial-name">Slate Grey</p>
+          <p class="dial-detail">Textured · Minimalist</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAND OPTIONS -->
+    <div class="bands-section">
+      <p class="dials-label">Band Options</p>
+      <div class="bands-grid">
+        <div class="band-card">
+          <div class="band-image">BAND 01</div>
+          <p class="band-name">Black Leather</p>
+        </div>
+        <div class="band-card">
+          <div class="band-image">BAND 02</div>
+          <p class="band-name">Brown Leather</p>
+        </div>
+        <div class="band-card">
+          <div class="band-image">BAND 03</div>
+          <p class="band-name">Steel Bracelet</p>
+        </div>
+        <div class="band-card">
+          <div class="band-image">BAND 04</div>
+          <p class="band-name">NATO Strap</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EMAIL -->
+<section id="email-section">
+  <p class="section-label">Stay Connected</p>
+  <h2 class="section-title">Be First to Know</h2>
+  <p class="email-sub">Join the waitlist for launch updates, early access, and exclusive pricing.</p>
+  <div class="email-form">
+    <input class="email-input" type="email" id="footer-email" placeholder="your@email.com">
+    <button class="email-submit" onclick="submitFooter()">Join</button>
+  </div>
+  <p class="email-success" id="footer-success">You're on the list.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 MUTO WATCHES</span>
+  <span>MUTOWATCHES.COM</span>
+</footer>
+
+<!-- KLAVIYO -->
+<script async type='text/javascript' src='https://static.klaviyo.com/onsite/js/QZZiTv/klaviyo.js?company_id=QZZiTv'></script>
+
+<script>
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Popup trigger after 4 seconds
+  setTimeout(() => {
+    document.getElementById('popup').classList.add('active');
+  }, 4000);
+
+  // Close popup
+  function closePopup() {
+    document.getElementById('popup').classList.remove('active');
+  }
+
+  // Close on overlay click
+  document.getElementById('popup').addEventListener('click', function(e) {
+    if (e.target === this) closePopup();
+  });
+
+  // Submit to Klaviyo
+  async function submitToKlaviyo(email) {
+    try {
+      await fetch('https://a.klaviyo.com/client/subscriptions/?company_id=QZZiTv', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'revision': '2023-02-22' },
+        body: JSON.stringify({
+          data: {
+            type: 'subscription',
+            attributes: {
+              list_id: 'V4nmNR',
+              email: email
+            }
+          }
+        })
+      });
+      return true;
+    } catch(e) {
+      return false;
+    }
+  }
+
+  async function submitPopup() {
+    const email = document.getElementById('popup-email').value;
+    if (!email || !email.includes('@')) return;
+    await submitToKlaviyo(email);
+    document.querySelector('.popup-form').style.display = 'none';
+    document.getElementById('popup-success').style.display = 'block';
+    setTimeout(closePopup, 2000);
+  }
+
+  async function submitFooter() {
+    const email = document.getElementById('footer-email').value;
+    if (!email || !email.includes('@')) return;
+    await submitToKlaviyo(email);
+    document.querySelector('.email-form').style.display = 'none';
+    document.getElementById('footer-success').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
