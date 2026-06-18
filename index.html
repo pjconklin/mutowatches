@@ -12,366 +12,165 @@
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --black: #111111;
-    --white: #ffffff;
-    --gray: #888888;
-    --light-gray: #f5f5f5;
-    --border: #e0e0e0;
-  }
-
+  :root { --black: #111111; --white: #ffffff; --gray: #888888; --light-gray: #f5f5f5; --border: #e0e0e0; }
   html { scroll-behavior: smooth; }
+  body { font-family: 'Raleway', sans-serif; font-weight: 200; background: var(--white); color: var(--black); overflow-x: hidden; }
 
-  body {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 200;
-    background: var(--white);
-    color: var(--black);
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 48px;
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s;
-  }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid transparent; transition: border-color 0.3s; }
   nav.scrolled { border-bottom-color: var(--border); }
   .nav-logo { font-size: 18px; letter-spacing: 10px; font-weight: 200; text-decoration: none; color: var(--black); }
   .nav-links { display: flex; gap: 40px; list-style: none; }
   .nav-links a { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; text-decoration: none; color: var(--black); font-weight: 300; transition: opacity 0.2s; }
   .nav-links a:hover { opacity: 0.5; }
 
-  /* HERO */
-  #hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0 24px;
-    position: relative;
-  }
+  #hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 24px; position: relative; }
   .hero-logo { font-size: clamp(48px, 10vw, 96px); letter-spacing: clamp(12px, 3vw, 28px); font-weight: 200; margin-bottom: 16px; }
   .hero-sub { font-size: 11px; letter-spacing: 8px; color: var(--gray); margin-bottom: 64px; }
-  .hero-cta {
-    display: flex; gap: 16px; align-items: center;
-  }
-  .btn-primary {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    background: var(--black);
-    color: var(--white);
-    border: none;
-    padding: 14px 32px;
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
+  .hero-cta { display: flex; gap: 16px; align-items: center; }
+  .btn-primary { font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; background: var(--black); color: var(--white); border: none; padding: 14px 32px; cursor: pointer; transition: opacity 0.2s; }
   .btn-primary:hover { opacity: 0.7; }
-  .btn-secondary {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    background: transparent;
-    color: var(--black);
-    border: 1px solid var(--black);
-    padding: 14px 32px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-  }
+  .btn-secondary { font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; background: transparent; color: var(--black); border: 1px solid var(--black); padding: 14px 32px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block; }
   .btn-secondary:hover { background: var(--black); color: var(--white); }
-  .scroll-indicator {
-    position: absolute;
-    bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    font-size: 9px;
-    letter-spacing: 4px;
-    color: var(--gray);
-    animation: bounce 2s infinite;
-  }
-  .scroll-indicator::after {
-    content: '';
-    width: 1px;
-    height: 40px;
-    background: var(--gray);
-  }
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(6px); }
-  }
+  .scroll-indicator { position: absolute; bottom: 40px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 9px; letter-spacing: 4px; color: var(--gray); animation: bounce 2s infinite; }
+  .scroll-indicator::after { content: ''; width: 1px; height: 40px; background: var(--gray); }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 
-  /* SECTIONS */
   section { padding: 120px 48px; }
-
-  /* ABOUT */
-  #about {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+  #about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; }
   .about-label { font-size: 9px; letter-spacing: 6px; color: var(--gray); text-transform: uppercase; margin-bottom: 24px; }
   .about-title { font-size: clamp(28px, 4vw, 48px); font-weight: 200; line-height: 1.3; margin-bottom: 32px; letter-spacing: 2px; }
   .about-text { font-size: 13px; line-height: 2; color: #444; font-weight: 300; margin-bottom: 24px; }
-  .about-image {
-    background: var(--light-gray);
-    aspect-ratio: 3/4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray);
-    font-size: 11px;
-    letter-spacing: 4px;
-  }
+  .about-image { background: var(--light-gray); aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 11px; letter-spacing: 4px; }
 
-  /* DIVIDER */
-  .divider {
-    width: 60px;
-    height: 1px;
-    background: var(--black);
-    margin: 0 auto;
-  }
-
-  /* PRODUCTS */
   #products { background: var(--white); }
-  .products-header {
-    text-align: center;
-    margin-bottom: 80px;
-  }
+  .products-header { text-align: center; margin-bottom: 80px; }
   .section-label { font-size: 9px; letter-spacing: 6px; color: var(--gray); text-transform: uppercase; margin-bottom: 16px; }
   .section-title { font-size: clamp(24px, 3vw, 40px); font-weight: 200; letter-spacing: 4px; }
-
-  .class-a {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .class-a-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    border-top: 1px solid var(--border);
-    padding-top: 32px;
-    margin-bottom: 48px;
-  }
+  .class-a { max-width: 1200px; margin: 0 auto; }
+  .class-a-header { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--border); padding-top: 32px; margin-bottom: 48px; }
   .class-title { font-size: 28px; letter-spacing: 8px; font-weight: 200; }
   .class-desc { font-size: 11px; letter-spacing: 2px; color: var(--gray); max-width: 400px; text-align: right; }
-
-  .product-main {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    margin-bottom: 80px;
-    align-items: start;
-  }
-  .product-image-main {
-    background: var(--light-gray);
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray);
-    font-size: 11px;
-    letter-spacing: 4px;
-  }
+  .product-main { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-bottom: 80px; align-items: start; }
+  .product-image-main { background: var(--light-gray); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 11px; letter-spacing: 4px; }
   .product-info { padding: 24px 0; }
   .product-name { font-size: 24px; letter-spacing: 6px; font-weight: 200; margin-bottom: 8px; }
   .product-tagline { font-size: 11px; letter-spacing: 3px; color: var(--gray); margin-bottom: 32px; }
   .product-detail { font-size: 12px; line-height: 2.2; color: #444; font-weight: 300; margin-bottom: 32px; }
   .product-price { font-size: 18px; letter-spacing: 4px; font-weight: 200; margin-bottom: 32px; }
   .spec-list { border-top: 1px solid var(--border); padding-top: 24px; margin-bottom: 32px; }
-  .spec-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 11px;
-    letter-spacing: 2px;
-  }
+  .spec-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 11px; letter-spacing: 2px; }
   .spec-key { color: var(--gray); }
-
-  /* DIAL OPTIONS */
-  .dials-section { margin-bottom: 80px; }
+  .dials-section, .bands-section { margin-bottom: 80px; }
   .dials-label { font-size: 9px; letter-spacing: 6px; color: var(--gray); text-transform: uppercase; margin-bottom: 32px; }
   .dials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .dial-card {
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
+  .dial-card { cursor: pointer; transition: opacity 0.2s; }
   .dial-card:hover { opacity: 0.7; }
-  .dial-image {
-    background: var(--light-gray);
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray);
-    font-size: 10px;
-    letter-spacing: 3px;
-    margin-bottom: 16px;
-  }
+  .dial-image { background: var(--light-gray); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 10px; letter-spacing: 3px; margin-bottom: 16px; }
   .dial-name { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 4px; }
   .dial-detail { font-size: 10px; letter-spacing: 2px; color: var(--gray); }
-
-  /* BAND OPTIONS */
-  .bands-section { margin-bottom: 80px; }
   .bands-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .band-card { cursor: pointer; transition: opacity 0.2s; }
   .band-card:hover { opacity: 0.7; }
-  .band-image {
-    background: var(--light-gray);
-    aspect-ratio: 2/1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray);
-    font-size: 9px;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-  }
+  .band-image { background: var(--light-gray); aspect-ratio: 2/1; display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 9px; letter-spacing: 2px; margin-bottom: 12px; }
   .band-name { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; }
 
-  /* EMAIL SECTION */
-  #email-section {
-    background: var(--black);
-    color: var(--white);
-    text-align: center;
-    padding: 120px 48px;
-  }
+  #email-section { background: var(--black); color: var(--white); text-align: center; padding: 120px 48px; }
   #email-section .section-label { color: #666; }
   #email-section .section-title { color: var(--white); margin-bottom: 16px; }
   .email-sub { font-size: 12px; letter-spacing: 3px; color: #888; margin-bottom: 48px; }
   .email-form { display: flex; gap: 0; max-width: 480px; margin: 0 auto; }
-  .email-input {
-    flex: 1;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 200;
-    font-size: 12px;
-    letter-spacing: 2px;
-    padding: 14px 20px;
-    border: 1px solid #444;
-    background: transparent;
-    color: var(--white);
-    outline: none;
-  }
+  .email-input { flex: 1; font-family: 'Raleway', sans-serif; font-weight: 200; font-size: 12px; letter-spacing: 2px; padding: 14px 20px; border: 1px solid #444; background: transparent; color: var(--white); outline: none; }
   .email-input::placeholder { color: #555; }
-  .email-submit {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    background: var(--white);
-    color: var(--black);
-    border: none;
-    padding: 14px 24px;
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
+  .email-submit { font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; background: var(--white); color: var(--black); border: none; padding: 14px 24px; cursor: pointer; transition: opacity 0.2s; }
   .email-submit:hover { opacity: 0.8; }
   .email-success { display: none; font-size: 12px; letter-spacing: 4px; color: #888; margin-top: 24px; }
 
-  /* FOOTER */
-  footer {
-    padding: 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid var(--border);
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gray);
-  }
+  footer { padding: 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); font-size: 10px; letter-spacing: 3px; color: var(--gray); }
 
-  /* POPUP */
-  .popup-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s;
-  }
-  .popup-overlay.active { opacity: 1; pointer-events: all; }
-  .popup {
-    background: var(--white);
-    padding: 64px 56px;
-    max-width: 480px;
-    width: 90%;
-    text-align: center;
-    position: relative;
-    transform: translateY(20px);
-    transition: transform 0.4s;
-  }
-  .popup-overlay.active .popup { transform: translateY(0); }
-  .popup-close {
-    position: absolute;
-    top: 20px; right: 24px;
-    font-size: 20px;
-    cursor: pointer;
-    color: var(--gray);
-    background: none;
-    border: none;
-    line-height: 1;
-  }
-  .popup-label { font-size: 9px; letter-spacing: 6px; color: var(--gray); text-transform: uppercase; margin-bottom: 24px; }
-  .popup-title { font-size: 24px; letter-spacing: 4px; font-weight: 200; margin-bottom: 12px; }
-  .popup-sub { font-size: 11px; letter-spacing: 2px; color: var(--gray); line-height: 1.8; margin-bottom: 32px; }
-  .popup-form { display: flex; flex-direction: column; gap: 12px; }
-  .popup-input {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 200;
-    font-size: 12px;
-    letter-spacing: 2px;
-    padding: 14px 16px;
-    border: 1px solid var(--border);
-    outline: none;
-    background: var(--white);
-    color: var(--black);
-    width: 100%;
-  }
-  .popup-input:focus { border-color: var(--black); }
-  .popup-success { display: none; font-size: 11px; letter-spacing: 3px; color: var(--gray); margin-top: 16px; }
+  /* OVERLAYS */
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; display: none; align-items: center; justify-content: center; }
+  .overlay.active { display: flex; }
+  .popup-box { background: #fff; padding: 40px 32px 36px; max-width: 460px; width: 95%; position: relative; text-align: center; }
+  .x-btn { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 22px; cursor: pointer; color: #aaa; font-family: inherit; line-height: 1; }
+  .x-btn:hover { color: #111; }
+  .pop-label { font-size: 10px; letter-spacing: 5px; color: #888; margin-bottom: 6px; text-transform: uppercase; }
+  .pop-title { font-size: 20px; letter-spacing: 4px; font-weight: 300; margin-bottom: 6px; color: #111; }
+  .pop-sub { font-size: 11px; letter-spacing: 2px; color: #888; margin-bottom: 24px; line-height: 1.7; }
+  .email-row { display: flex; max-width: 340px; margin: 0 auto 28px; }
+  .email-row input { flex: 1; font-family: 'Raleway', sans-serif; font-size: 12px; letter-spacing: 1px; padding: 12px 14px; border: 1px solid #ccc; border-right: none; outline: none; color: #111; }
+  .spin-btn { font-family: 'Raleway', sans-serif; font-size: 10px; letter-spacing: 3px; padding: 12px 18px; background: #ccc; color: #fff; border: none; cursor: not-allowed; transition: background 0.3s; white-space: nowrap; }
+  .spin-btn.ready { background: #111; cursor: pointer; }
+  .congrats-box { background: #fff; padding: 48px 36px; max-width: 400px; width: 95%; position: relative; text-align: center; }
+  .code-display { border: 1px solid #ccc; padding: 14px; font-size: 18px; letter-spacing: 8px; font-weight: 300; color: #111; margin-bottom: 12px; }
+  .copy-btn { font-family: 'Raleway', sans-serif; font-size: 10px; letter-spacing: 3px; padding: 12px 24px; background: #111; color: #fff; border: none; cursor: pointer; width: 100%; margin-bottom: 8px; }
+  .copy-btn:hover { opacity: 0.7; }
+  .copy-confirm { font-size: 10px; letter-spacing: 2px; color: #888; height: 16px; }
 </style>
 </head>
 <body>
 
-<!-- POPUP -->
-<div class="popup-overlay" id="popup">
-  <div class="popup">
-    <button class="popup-close" onclick="closePopup()">×</button>
-    <p class="popup-label">Limited Early Access</p>
-    <h2 class="popup-title">10% Off Your Pre-Order</h2>
-    <p class="popup-sub">Enter your email for product updates and unlock 10% off your Muto pre-order.</p>
-    <div class="popup-form">
-      <input class="popup-input" type="email" id="popup-email" placeholder="your@email.com">
-      <button class="btn-primary" onclick="submitPopup()" style="width:100%">Unlock My Discount</button>
+<!-- SPIN OVERLAY -->
+<div class="overlay" id="spinOverlay">
+  <div class="popup-box">
+    <button class="x-btn" id="spinX" style="opacity:0;pointer-events:none;" onclick="closeSpinPopup()">×</button>
+    <p class="pop-label">Welcome to Muto Watches</p>
+    <p class="pop-title">Spin for Savings!</p>
+    <p class="pop-sub">Enter your email for product updates and the chance to spin</p>
+    <div class="email-row">
+      <input type="email" id="spinEmail" placeholder="your@email.com" oninput="checkEmail()">
+      <button class="spin-btn" id="spinBtn" onclick="doSpin()">SPIN</button>
     </div>
-    <p class="popup-success" id="popup-success">You're on the list. We'll be in touch.</p>
+    <div style="display:flex;justify-content:center;">
+      <div style="position:relative;width:360px;height:440px;margin-left:-20px;">
+        <svg width="400" height="440" viewBox="0 0 400 440" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;z-index:1;overflow:visible;">
+          <rect x="112" y="82"  width="116" height="14" rx="3" fill="#c8c8c8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="116" y="69"  width="108" height="14" rx="3" fill="#b8b8b8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="120" y="56"  width="100" height="14" rx="3" fill="#c8c8c8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="124" y="43"  width="92"  height="14" rx="3" fill="#b8b8b8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="128" y="31"  width="84"  height="13" rx="3" fill="#c8c8c8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="132" y="20"  width="76"  height="12" rx="2" fill="#b8b8b8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="136" y="10"  width="68"  height="11" rx="2" fill="#c8c8c8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="140" y="0"   width="60"  height="11" rx="2" fill="#b8b8b8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="112" y="344" width="116" height="14" rx="3" fill="#c8c8c8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="116" y="357" width="108" height="14" rx="3" fill="#b8b8b8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="120" y="370" width="100" height="14" rx="3" fill="#c8c8c8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="124" y="383" width="92"  height="14" rx="3" fill="#b8b8b8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="128" y="396" width="84"  height="13" rx="3" fill="#c8c8c8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="132" y="408" width="76"  height="12" rx="2" fill="#b8b8b8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="136" y="419" width="68"  height="11" rx="2" fill="#c8c8c8" stroke="#aaa" stroke-width="0.5"/>
+          <rect x="140" y="429" width="60"  height="11" rx="2" fill="#b8b8b8" stroke="#aaa" stroke-width="0.5"/>
+          <path d="M63,112 L91,90 L245,90 L273,112 L281,132 L281,308 L273,330 L245,350 L91,350 L63,330 L55,308 L55,132 Z" fill="#d0d0d0" stroke="#aaa" stroke-width="1.5"/>
+          <path d="M70,118 L95,98 L241,98 L266,118 L272,136 L272,304 L266,326 L241,342 L95,342 L70,326 L63,304 L63,136 Z" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
+          <rect x="281" y="199" width="38" height="48" rx="4" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
+          <rect x="286" y="206" width="20" height="34" rx="3" fill="#b0b0b0"/>
+          <line x1="286" y1="214" x2="306" y2="214" stroke="#999" stroke-width="0.8"/>
+          <line x1="286" y1="221" x2="306" y2="221" stroke="#999" stroke-width="0.8"/>
+          <line x1="286" y1="228" x2="306" y2="228" stroke="#999" stroke-width="0.8"/>
+          <line x1="286" y1="235" x2="306" y2="235" stroke="#999" stroke-width="0.8"/>
+          <g transform="rotate(-15, 295, 170)"><rect x="281" y="157" width="32" height="26" rx="3" fill="#c0c0c0" stroke="#999" stroke-width="1"/><rect x="286" y="161" width="18" height="18" rx="2" fill="#b0b0b0"/></g>
+          <g transform="rotate(15, 295, 272)"><rect x="281" y="259" width="32" height="26" rx="3" fill="#c0c0c0" stroke="#999" stroke-width="1"/><rect x="286" y="263" width="18" height="18" rx="2" fill="#b0b0b0"/></g>
+        </svg>
+        <canvas id="dialCanvas" width="248" height="248" style="position:absolute;left:44px;top:96px;border-radius:50%;z-index:2;"></canvas>
+        <canvas id="handCanvas" width="248" height="248" style="position:absolute;left:44px;top:96px;border-radius:50%;z-index:3;"></canvas>
+        <div id="spinBadge" style="display:none;position:absolute;left:168px;top:220px;transform:translate(-50%,-50%);background:rgba(0,0,0,0.88);padding:10px 16px;text-align:center;border-radius:4px;z-index:4;">
+          <div style="font-size:20px;font-weight:300;letter-spacing:2px;color:#fff;">15%</div>
+          <div style="font-size:8px;letter-spacing:3px;color:#aaa;">OFF YOUR ORDER</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONGRATS OVERLAY -->
+<div class="overlay" id="congratsOverlay">
+  <div class="congrats-box">
+    <button class="x-btn" style="opacity:1;pointer-events:all;" onclick="closeCongrats()">×</button>
+    <p class="pop-label">You won!</p>
+    <p class="pop-title" style="font-size:18px;margin-bottom:16px;">Congrats on 15% off your first order with Muto!</p>
+    <p class="pop-sub">Use this code at checkout to unlock your savings:</p>
+    <div class="code-display">MUTO15</div>
+    <button class="copy-btn" onclick="copyCode()">COPY CODE</button>
+    <p class="copy-confirm" id="copyConfirm"></p>
   </div>
 </div>
 
@@ -390,7 +189,7 @@
   <div class="hero-logo">MUTO</div>
   <div class="hero-sub">WATCHES</div>
   <div class="hero-cta">
-    <button class="btn-primary" onclick="document.getElementById('popup').classList.add('active')">Register Interest</button>
+    <button class="btn-primary" onclick="openSpinPopup()">Register Interest</button>
     <a href="#products" class="btn-secondary">View Collection</a>
   </div>
   <div class="scroll-indicator">SCROLL</div>
@@ -416,20 +215,17 @@
     <p class="section-label">The Collection</p>
     <h2 class="section-title">CLASS A</h2>
   </div>
-
   <div class="class-a">
     <div class="class-a-header">
       <span class="class-title">CLASS A</span>
       <span class="class-desc">Our inaugural timepiece. Available in silver and gold. Includes three interchangeable dials.</span>
     </div>
-
-    <!-- MAIN PRODUCT -->
     <div class="product-main">
       <div class="product-image-main">WATCH RENDER</div>
       <div class="product-info">
         <h3 class="product-name">MUTO — CLASS A</h3>
         <p class="product-tagline">Silver · Three Dial Set</p>
-        <p class="product-detail">The Class A is our foundation — a precision-engineered case housing a Swiss automatic movement, paired with three interchangeable dials that swap in seconds. One watch for every version of you.</p>
+        <p class="product-detail">The Class A is our foundation — a precision-engineered case housing a Swiss automatic movement, paired with three interchangeable dials that swap in seconds.</p>
         <p class="product-price">From $— —</p>
         <div class="spec-list">
           <div class="spec-item"><span class="spec-key">Case</span><span>44mm Stainless Steel</span></div>
@@ -438,55 +234,26 @@
           <div class="spec-item"><span class="spec-key">Dials Included</span><span>3</span></div>
           <div class="spec-item"><span class="spec-key">Water Resistance</span><span>TBD</span></div>
         </div>
-        <button class="btn-primary" onclick="document.getElementById('popup').classList.add('active')">Pre-Order — Coming Soon</button>
+        <button class="btn-primary" onclick="openSpinPopup()">Pre-Order — Coming Soon</button>
       </div>
     </div>
-
-    <!-- DIAL OPTIONS -->
     <div class="dials-section">
       <p class="dials-label">Included Dial Options</p>
       <div class="dials-grid">
-        <div class="dial-card">
-          <div class="dial-image">DIAL 01</div>
-          <p class="dial-name">Classic White</p>
-          <p class="dial-detail">Minimalist · Roman Numerals</p>
-        </div>
-        <div class="dial-card">
-          <div class="dial-image">DIAL 02</div>
-          <p class="dial-name">Midnight Navy</p>
-          <p class="dial-detail">Bold · Baton Indices</p>
-        </div>
-        <div class="dial-card">
-          <div class="dial-image">DIAL 03</div>
-          <p class="dial-name">Slate Grey</p>
-          <p class="dial-detail">Textured · Minimalist</p>
-        </div>
+        <div class="dial-card"><div class="dial-image">DIAL 01</div><p class="dial-name">Classic White</p><p class="dial-detail">Minimalist · Roman Numerals</p></div>
+        <div class="dial-card"><div class="dial-image">DIAL 02</div><p class="dial-name">Midnight Navy</p><p class="dial-detail">Bold · Baton Indices</p></div>
+        <div class="dial-card"><div class="dial-image">DIAL 03</div><p class="dial-name">Slate Grey</p><p class="dial-detail">Textured · Minimalist</p></div>
       </div>
     </div>
-
-    <!-- BAND OPTIONS -->
     <div class="bands-section">
       <p class="dials-label">Band Options</p>
       <div class="bands-grid">
-        <div class="band-card">
-          <div class="band-image">BAND 01</div>
-          <p class="band-name">Black Leather</p>
-        </div>
-        <div class="band-card">
-          <div class="band-image">BAND 02</div>
-          <p class="band-name">Brown Leather</p>
-        </div>
-        <div class="band-card">
-          <div class="band-image">BAND 03</div>
-          <p class="band-name">Steel Bracelet</p>
-        </div>
-        <div class="band-card">
-          <div class="band-image">BAND 04</div>
-          <p class="band-name">NATO Strap</p>
-        </div>
+        <div class="band-card"><div class="band-image">BAND 01</div><p class="band-name">Black Leather</p></div>
+        <div class="band-card"><div class="band-image">BAND 02</div><p class="band-name">Brown Leather</p></div>
+        <div class="band-card"><div class="band-image">BAND 03</div><p class="band-name">Steel Bracelet</p></div>
+        <div class="band-card"><div class="band-image">BAND 04</div><p class="band-name">NATO Strap</p></div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -502,75 +269,172 @@
   <p class="email-success" id="footer-success">You're on the list.</p>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <span>© 2025 MUTO WATCHES</span>
   <span>MUTOWATCHES.COM</span>
 </footer>
 
-<!-- KLAVIYO -->
 <script async type='text/javascript' src='https://static.klaviyo.com/onsite/js/QZZiTv/klaviyo.js?company_id=QZZiTv'></script>
 
 <script>
-  // Nav scroll effect
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-  });
+// NAV
+window.addEventListener('scroll', function() {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
 
-  // Popup trigger after 4 seconds
-  setTimeout(() => {
-    document.getElementById('popup').classList.add('active');
-  }, 4000);
+// POPUP CONTROLS
+function openSpinPopup() {
+  document.getElementById('spinOverlay').classList.add('active');
+}
+function closeSpinPopup() {
+  document.getElementById('spinOverlay').classList.remove('active');
+}
+function closeCongrats() {
+  document.getElementById('congratsOverlay').classList.remove('active');
+}
 
-  // Close popup
-  function closePopup() {
-    document.getElementById('popup').classList.remove('active');
+// EMAIL VALIDATION
+function checkEmail() {
+  var val = document.getElementById('spinEmail').value;
+  var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+  var btn = document.getElementById('spinBtn');
+  btn.disabled = !valid;
+  if (valid) { btn.classList.add('ready'); } else { btn.classList.remove('ready'); }
+}
+
+// COPY CODE
+function copyCode() {
+  var code = 'MUTO15';
+  var el = document.getElementById('copyConfirm');
+  function showMsg(msg) { el.textContent = msg; setTimeout(function(){ el.textContent=''; }, 2500); }
+  try {
+    navigator.clipboard.writeText(code).then(function(){ showMsg('Code copied!'); }).catch(function(){ fallback(); });
+  } catch(e) { fallback(); }
+  function fallback() {
+    var ta = document.createElement('textarea');
+    ta.value = code; ta.style.cssText = 'position:fixed;left:-9999px;';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try { document.execCommand('copy'); showMsg('Code copied!'); } catch(e2) { showMsg('Code: MUTO15'); }
+    document.body.removeChild(ta);
+  }
+}
+
+// KLAVIYO
+async function klaviyoSubmit(email) {
+  try {
+    await fetch('https://a.klaviyo.com/client/subscriptions/?company_id=QZZiTv', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'revision': '2023-02-22' },
+      body: JSON.stringify({ data: { type: 'subscription', attributes: { list_id: 'V4nmNR', email: email } } })
+    });
+  } catch(e) {}
+}
+
+// FOOTER EMAIL
+function submitFooter() {
+  var email = document.getElementById('footer-email').value;
+  if (!email || !email.includes('@')) return;
+  klaviyoSubmit(email);
+  document.querySelector('.email-form').style.display = 'none';
+  document.getElementById('footer-success').style.display = 'block';
+}
+
+// WHEEL
+var WPI2 = Math.PI * 2;
+var SEG = WPI2 / 12;
+var segs = ['5%','8%','3%','10%','5%','7%','15%','5%','8%','6%','10%','4%'];
+var spinning = false;
+
+// Dial drawn with seg 0 starting at -PI/2 (12 o'clock), clockwise.
+// Seg 6 center = -PI/2 + 6*SEG + SEG/2
+// = -PI/2 + 6*(PI/6) + PI/12
+// = -PI/2 + PI + PI/12
+// = PI/2 + PI/12  = 7PI/12 ≈ 1.833 rad
+// Hand draws upward at angle 0 (lineTo 0,-len) so angle 0 = 12 o'clock.
+// To reach seg 6 center the hand must rotate to: PI/2 + PI/12
+var HAND_END = Math.PI/2 + Math.PI/12 + 3*SEG;
+
+function initWheel() {
+  var dc = document.getElementById('dialCanvas');
+  var dctx = dc.getContext('2d');
+  var hc = document.getElementById('handCanvas');
+  var hctx = hc.getContext('2d');
+  var cx = 124, cy = 124, r = 120;
+
+  // Draw static dial
+  for (var i = 0; i < 12; i++) {
+    var s = -Math.PI/2 + i * SEG;
+    var e = s + SEG;
+    var m = s + SEG/2;
+    dctx.beginPath(); dctx.moveTo(cx,cy); dctx.arc(cx,cy,r-8,s,e); dctx.closePath();
+    dctx.fillStyle = i%2===0 ? '#1a4a1a' : '#2a6a2a'; dctx.fill();
+    dctx.strokeStyle = '#3a7a3a'; dctx.lineWidth = 0.5; dctx.stroke();
+    dctx.save(); dctx.translate(cx,cy); dctx.rotate(m);
+    dctx.textAlign='right'; dctx.fillStyle='#ccc'; dctx.font='300 10px sans-serif';
+    dctx.fillText(segs[i], r-16, 4); dctx.restore();
+  }
+  dctx.beginPath(); dctx.moveTo(cx,cy-r+6); dctx.lineTo(cx,cy-r+18);
+  dctx.strokeStyle='#fff'; dctx.lineWidth=3; dctx.stroke();
+  dctx.beginPath(); dctx.arc(cx,cy,r,0,WPI2); dctx.strokeStyle='#888'; dctx.lineWidth=6; dctx.stroke();
+  dctx.beginPath(); dctx.arc(cx,cy,r-5,0,WPI2); dctx.strokeStyle='#bbb'; dctx.lineWidth=2; dctx.stroke();
+
+  function drawHand(a) {
+    hctx.clearRect(0,0,248,248);
+    var len = r-20;
+    hctx.save(); hctx.translate(cx,cy); hctx.rotate(a);
+    hctx.beginPath(); hctx.moveTo(0,8); hctx.lineTo(0,-len);
+    hctx.strokeStyle='#fff'; hctx.lineWidth=2.5; hctx.lineCap='round'; hctx.stroke();
+    hctx.beginPath(); hctx.moveTo(-4,-len+10); hctx.lineTo(4,-len+10); hctx.lineTo(0,-len-2);
+    hctx.closePath(); hctx.fillStyle='#fff'; hctx.fill();
+    hctx.restore();
+    hctx.beginPath(); hctx.arc(cx,cy,11,0,WPI2); hctx.fillStyle='#fff'; hctx.fill();
+    hctx.strokeStyle='#888'; hctx.lineWidth=1; hctx.stroke();
+    hctx.beginPath(); hctx.arc(cx,cy,4,0,WPI2); hctx.fillStyle='#333'; hctx.fill();
   }
 
-  // Close on overlay click
-  document.getElementById('popup').addEventListener('click', function(e) {
-    if (e.target === this) closePopup();
-  });
+  drawHand(0); // start at 12 o'clock
 
-  // Submit to Klaviyo
-  async function submitToKlaviyo(email) {
-    try {
-      await fetch('https://a.klaviyo.com/client/subscriptions/?company_id=QZZiTv', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json', 'revision': '2023-02-22' },
-        body: JSON.stringify({
-          data: {
-            type: 'subscription',
-            attributes: {
-              list_id: 'V4nmNR',
-              email: email
-            }
-          }
-        })
-      });
-      return true;
-    } catch(e) {
-      return false;
+  window.doSpin = function() {
+    if (spinning) return;
+    var email = document.getElementById('spinEmail').value;
+    spinning = true;
+    document.getElementById('spinBtn').disabled = true;
+    document.getElementById('spinBtn').classList.remove('ready');
+
+    var spins = (6 + Math.floor(Math.random()*3)) * WPI2;
+    var finalAngle = spins + HAND_END; // total rotation from 0
+    var duration = 4500;
+    var t0 = performance.now();
+
+    function ease(t) { return 1 - Math.pow(1-t,4); }
+    function frame(now) {
+      var t = Math.min((now-t0)/duration, 1);
+      drawHand(finalAngle * ease(t));
+      if (t < 1) { requestAnimationFrame(frame); }
+      else {
+        drawHand(HAND_END);
+        document.getElementById('spinBadge').style.display = 'block';
+        klaviyoSubmit(email);
+        setTimeout(function() {
+          closeSpinPopup();
+          document.getElementById('congratsOverlay').classList.add('active');
+        }, 1800);
+      }
     }
-  }
+    requestAnimationFrame(frame);
+  };
+}
 
-  async function submitPopup() {
-    const email = document.getElementById('popup-email').value;
-    if (!email || !email.includes('@')) return;
-    await submitToKlaviyo(email);
-    document.querySelector('.popup-form').style.display = 'none';
-    document.getElementById('popup-success').style.display = 'block';
-    setTimeout(closePopup, 2000);
-  }
-
-  async function submitFooter() {
-    const email = document.getElementById('footer-email').value;
-    if (!email || !email.includes('@')) return;
-    await submitToKlaviyo(email);
-    document.querySelector('.email-form').style.display = 'none';
-    document.getElementById('footer-success').style.display = 'block';
-  }
+// Launch popup after 4s
+setTimeout(function() {
+  openSpinPopup();
+  setTimeout(function() {
+    var x = document.getElementById('spinX');
+    x.style.opacity = '1';
+    x.style.pointerEvents = 'all';
+  }, 3000);
+  initWheel();
+}, 4000);
 </script>
-
 </body>
 </html>
